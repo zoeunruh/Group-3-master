@@ -105,8 +105,18 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
-           
+            string useItem = itemsGridView.CurrentCell.Value.ToString();
+            int orderItemQuantD = (int)numericUpDown1.Value;
+
+            SqlConnection conn = null;
+            conn = new SqlConnection(@"Data Source = 10.135.85.184; User ID = group3; Password = Grp3s2117");
+            conn.Open();
+
+            SqlCommand updateUseItem = new SqlCommand("UPDATE Items SET Quantity=Quantity-'" + orderItemQuantD + "'", conn);
+            SqlDataAdapter da = new SqlDataAdapter(updateUseItem);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
         }
 
         private void createOrderBttn_Click(object sender, EventArgs e)
